@@ -1,4 +1,4 @@
-export const BASE_URL = `http://192.168.1.183:3001`;
+export const BASE_URL = `https://basic-be-todolist.onrender.com`;
 const API_URL = `${BASE_URL}/api/v1`;
 
 export const get = async (path, token) => {
