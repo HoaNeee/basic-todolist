@@ -72,6 +72,7 @@ const MyTask = () => {
                   onPage={true}
                   smaller={true}
                   tasks={tasks}
+                  footerSmaller
                 />
               )}
             </div>

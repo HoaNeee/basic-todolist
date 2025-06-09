@@ -69,10 +69,10 @@ const ModalAdd = ({
             />
           }
         />
-        <div className="w-full mt-5 h-full">
+        <div className="w-full md:mt-5 mt-2 h-full">
           <form
             action=""
-            className="p-5 border-2 border-gray-300 h-full flex flex-col justify-between"
+            className="md:p-5 p-2 md:border-2 border-gray-300 h-full flex flex-col justify-between"
             onSubmit={onSubmit}
             name={`${typeModal}-${headContent
               .split(" ")

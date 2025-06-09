@@ -1,7 +1,7 @@
 import { CiSearch } from "react-icons/ci";
 import { FaRegBell, FaBars, FaSleigh } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
-import { Navigate, NavLink, useLocation, useNavigate } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { dayOfWeek, formatDate } from "../helpers/formatDate";
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-tooltip";
@@ -12,6 +12,7 @@ import { getCookie } from "../utils/cookie";
 import { socket } from "../socket/socket";
 import { useSelector } from "react-redux";
 import Loading from "../components/Loading";
+import { IoSearch } from "react-icons/io5";
 
 const Header = () => {
   const [notifications, setNotifications] = useState([]);
@@ -133,12 +134,15 @@ const Header = () => {
   return (
     <header className="w-full bg-[#F8F8F8] flex justify-center shadow-md fixed top-0 left-0 z-30">
       <div className="container xl:px-4 flex justify-between items-center py-6 px-1">
-        <p className="font-semibold text-3xl text-[#FF6767]">
+        <Link
+          to={"/"}
+          className="font-semibold text-2xl md:text-3xl text-[#FF6767]"
+        >
           To-<span className="text-black">Do</span>
-        </p>
+        </Link>
 
         <form action="" onSubmit={handleSearch}>
-          <div className="bg-[#F5F8FF] xl:w-2xl lg:w-xl md:w-xs  md:flex hidden shadow-md rounded-lg items-center">
+          <div className="bg-[#F5F8FF] xl:w-2xl lg:w-xl md:w-xs md:flex hidden shadow-md rounded-lg items-center">
             <input
               className="block flex-1 outline-0 text-sm pl-3 font-medium "
               type="text"
@@ -151,7 +155,7 @@ const Header = () => {
               type="submit"
               className="p-2 bg-[#FF6767] h-full inline-block rounded-lg cursor-pointer"
             >
-              <CiSearch className="text-white text-2xl" />
+              <IoSearch className="text-white text-2xl" />
             </button>
           </div>
         </form>
@@ -181,10 +185,38 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="md:hidden">
-          <button>
-            <FaBars className="text-xl" />
-          </button>
+        {/* nav for mobile */}
+        <div className="md:hidden md:invisible">
+          <div className="flex gap-3 relative">
+            <form action="" onSubmit={handleSearch}>
+              <div className="bg-[#F5F8FF] flex shadow-md rounded-full items-center">
+                <input
+                  className="block flex-1 outline-0 text-xs pl-3 font-medium"
+                  type="text"
+                  name="keyword"
+                  id=""
+                  placeholder="Search your task here..."
+                  defaultValue={keyword || ""}
+                />
+                <button className="bg-[#FF6767] h-7 w-7 inline-flex items-center justify-center rounded-full cursor-pointer relative">
+                  <IoSearch className="text-white" />
+                </button>
+              </div>
+            </form>
+
+            <button
+              className="bg-[#FF6767] h-7 w-7 inline-flex items-center justify-center rounded-full cursor-pointer relative"
+              data-tooltip-id="tooltip-notify"
+              data-tooltip-offset={4}
+            >
+              <FaRegBell className="text-white" />
+              {notifications &&
+                notifications.length > 0 &&
+                notifications.some((item) => !item.isRead) && (
+                  <div className="inline-block absolute top-0 right-0 h-2 w-2 rounded-full bg-red-700" />
+                )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -219,7 +251,11 @@ const Header = () => {
           <div className="h-full max-h-2/11 bg-white text-black px-4 border-b border-gray-300">
             <div className="flex justify-between items-center">
               <p className="font-semibold">Notifications</p>
-              <TiArrowBack color="#FF6767" size={30} />
+              <TiArrowBack
+                color="#FF6767"
+                size={30}
+                onClick={() => setOpenTooltip(false)}
+              />
             </div>
             <span className="text-sm text-[#A1A3AB]">Today</span>
           </div>

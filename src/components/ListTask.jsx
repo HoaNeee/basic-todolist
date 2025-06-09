@@ -1,7 +1,14 @@
 import React from "react";
 import CardTodo from "./CardTodo";
 
-const ListTask = ({ tasks, onPage, location, smaller, Link }) => {
+const ListTask = ({
+  tasks,
+  onPage,
+  location,
+  smaller,
+  Link,
+  footerSmaller,
+}) => {
   if (!tasks) {
     return <></>;
   }
@@ -13,7 +20,7 @@ const ListTask = ({ tasks, onPage, location, smaller, Link }) => {
           title={task.title || ""}
           desc={task.content || ""}
           imageUrl={task.thumbnail || ""}
-          footerSmaller={true}
+          footerSmaller={footerSmaller || false}
           smaller={smaller || false}
           key={task._id}
           Link={Link || false}

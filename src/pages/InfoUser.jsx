@@ -11,10 +11,12 @@ import { toast } from "react-toastify";
 import { changePassword, updateUser } from "../services/api/user";
 import { postImage } from "../utils/requets";
 import Loading from "../components/Loading";
+import { Tooltip } from "react-tooltip";
 
 const InfoUser = () => {
   const [showChangePass, setShowChangePass] = useState(false);
   const [loading, setLoading] = useState();
+  const [showChangeImage, setShowChangeImage] = useState(false);
 
   const user = useSelector((state) => state.auth.auth);
   const dispatch = useDispatch();
@@ -53,11 +55,11 @@ const InfoUser = () => {
 
   const hanldeChangeImage = async (e) => {
     const token = getCookie("token");
-
-    if (token) {
+    const file = e.target.files[0];
+    if (token && file) {
       try {
         setLoading(true);
-        const file = e.target.files[0];
+
         const responseImage = await postImage("user", "avatar", file, token);
         if (!responseImage || responseImage.code !== 200) {
           throw new Error(responseImage.message || "ERROR");
@@ -157,13 +159,26 @@ const InfoUser = () => {
             <HeadContent title={"Account Infomation"} Left={<GoBack />} />
             <div className="flex gap-4 items-center mt-5 px-4">
               <div className="w-24 h-24 rounded-full relative overflow-hidden">
-                <img
-                  src={user?.avatar || ImageAvatarNotFound}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
+                <div className="h-full w-full sm:block hidden">
+                  <img
+                    src={user?.avatar || ImageAvatarNotFound}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div
+                  className="h-full w-full sm:hidden block sm:invisible visible"
+                  // onClick={handleShowChangeImage}
+                  data-tooltip-id="tooltip-change-image"
+                >
+                  <img
+                    src={user?.avatar || ImageAvatarNotFound}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </div>
 
-                <div className="h-full w-full absolute rounded-full top-0 left-0 hover:bg-black/40 transition-all group">
+                <div className="h-full w-full absolute rounded-full top-0 left-0 hover:bg-black/40 transition-all group sm:block hidden">
                   <div className="h-full w-full text-white text-sm group-hover:flex flex-col justify-around items-center hidden font-medium">
                     <label
                       className="cursor-pointer hover:text-yellow-300"
@@ -286,6 +301,50 @@ const InfoUser = () => {
             </div>
           </div>
         </div>
+        <Tooltip
+          id="tooltip-change-image"
+          clickable
+          style={{
+            borderRadius: "5px",
+          }}
+          openEvents={{
+            click: true,
+          }}
+          closeEvents={{
+            click: true,
+          }}
+          globalCloseEvents={{
+            clickOutsideAnchor: true,
+            scroll: true,
+          }}
+          isOpen={showChangeImage}
+          setIsOpen={setShowChangeImage}
+          variant={"dark"}
+        >
+          <div className="text-white h-18 w-20 text-sm flex flex-col gap-2 justify-center items-center font-medium">
+            <label
+              className="cursor-pointer w-16 py-1 text-center rounded-sm bg-yellow-600"
+              htmlFor="avatar"
+            >
+              Change
+            </label>
+            <input
+              type="file"
+              name="avatar"
+              id="avatar"
+              className="hidden"
+              onChange={hanldeChangeImage}
+            />
+            {user && user.avatar && (
+              <span
+                className="cursor-pointer py-1 w-16 text-center bg-red-600 rounded-sm"
+                onClick={handleDeleteImage}
+              >
+                Delete
+              </span>
+            )}
+          </div>
+        </Tooltip>
         {loading && <Loading typeLoading={"screen"} />}
       </>
     )

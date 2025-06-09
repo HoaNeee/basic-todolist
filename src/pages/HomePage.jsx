@@ -186,7 +186,7 @@ const HomePage = () => {
     <div className="w-full flex flex-col h-full">
       <div className="flex justify-between items-center">
         <div className="inline-flex items-center gap-1">
-          <p className="lg:text-3xl md:text-2xl text-xl font-medium">
+          <p className="lg:text-3xl md:text-2xl text-xl md:font-medium font-semibold">
             Welcome back, {userName ? userName[userName.length - 1] : "User"}{" "}
           </p>
           <div className="w-[32px] h-[32px] md:w-[42px] md:h-[42px] overflow-hidden">

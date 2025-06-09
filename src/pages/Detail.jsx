@@ -340,7 +340,7 @@ const Detail = ({ type }) => {
         onCancel={hideDeleteTask}
         openTooltip={openTooltipDelete}
         setOpenTooltip={setOpenTooltipDelete}
-        theme={"error"}
+        theme={""}
         onOk={handleDeleteTask}
       />
     </>

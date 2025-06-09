@@ -56,7 +56,6 @@ const Sider = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log("click");
     dispatch(removeUser(null));
     deleteCookie("token");
   };
@@ -73,6 +72,7 @@ const Sider = () => {
             <Link
               to={"/my-info"}
               className="w-[86px] h-[86px] overflow-hidden rounded-full border-2 border-white"
+              onClick={() => setShowMenu(false)}
             >
               <img
                 className="h-full w-full object-cover"
@@ -84,6 +84,7 @@ const Sider = () => {
               <Link
                 to={"/my-info"}
                 className="text-white font-semibold hover:text-gray-100"
+                onClick={() => setShowMenu(false)}
               >
                 {user.fullname || "User name"}
               </Link>
@@ -136,7 +137,7 @@ const Sider = () => {
         <div className="w-[45px] h-[45px] overflow-hidden rounded-full border-2 border-white">
           <img
             className="h-full w-full object-cover"
-            src="https://www.vietnamworks.com/hrinsider/wp-content/uploads/2023/12/hinh-anh-cute-anime-009.jpg"
+            src={user?.avatar || ImageAvatarNotFound}
             alt=""
           />
         </div>

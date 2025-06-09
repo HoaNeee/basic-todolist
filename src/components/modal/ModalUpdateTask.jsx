@@ -14,7 +14,6 @@ import { CiImageOn } from "react-icons/ci";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import ModalUser from "./ModalUser";
-import Loading from "../Loading";
 
 const ModalUpdateTask = ({
   isOpen,
@@ -197,7 +196,7 @@ const ModalUpdateTask = ({
       >
         <div className="w-full h-full">
           <div className="h-full w-full bg-white">
-            <div className="p-3 h-full w-full">
+            <div className="h-full w-full md:p-3 p-0">
               <div className="h-full w-full flex flex-col gap-2">
                 <HeadContent
                   title={"Edit Task"}
@@ -211,10 +210,10 @@ const ModalUpdateTask = ({
                 />
                 <form
                   action=""
-                  className="p-3 overflow-y-auto scroll-none h-full"
+                  className="overflow-y-auto scroll-none h-full md:p-3 p-0 mt-2 md:mt-0"
                   onSubmit={handleSubmit}
                 >
-                  <div className="flex lg:flex-row flex-col lg:gap-10 gap-3 border-[1.5px] p-4 rounded-xs border-[#A1A3AB]">
+                  <div className="flex lg:flex-row flex-col lg:gap-10 gap-3 md:border-[1.5px] md:p-4 p-0 rounded-xs border-[#A1A3AB]">
                     <div className="flex flex-col w-full lg:w-5/7 gap-4 h-full">
                       <div className="flex flex-col gap-1">
                         <label

@@ -51,7 +51,7 @@ const CardTodo = ({
               <div>
                 <p
                   className={`md:text-sm text-xs text-[#747474] text-ellipsis ${
-                    smaller ? "line-clamp-2 my-3" : "line-clamp-3 min-h-16"
+                    smaller ? "line-clamp-2 my-3" : "line-clamp-3"
                   }`}
                 >
                   {desc || "This is the description"}
