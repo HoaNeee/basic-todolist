@@ -20,3 +20,11 @@ export const register = async (data) => {
     return error;
   }
 };
+export const logout = async (token) => {
+  try {
+    const response = await post("/users/logout", token);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

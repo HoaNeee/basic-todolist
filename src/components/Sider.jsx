@@ -8,9 +8,10 @@ import { RxExit } from "react-icons/rx";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ImageAvatarNotFound from "../assets/avatarNotFound.jpg";
-import { deleteCookie } from "../utils/cookie";
+import { deleteCookie, getCookie } from "../utils/cookie";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { removeUser } from "../redux/reducers/authReducer";
+import { logout } from "../services/api/auth";
 
 const menu = [
   {
@@ -55,9 +56,17 @@ const Sider = () => {
   const user = useSelector((state) => state.auth.auth);
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(removeUser(null));
-    deleteCookie("token");
+  const handleLogout = async () => {
+    const token = getCookie("token");
+    if (token) {
+      try {
+        await logout(token);
+        dispatch(removeUser(null));
+        deleteCookie("token");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (

@@ -8,6 +8,7 @@ const ListTask = ({
   smaller,
   Link,
   footerSmaller,
+  footerCol,
 }) => {
   if (!tasks) {
     return <></>;
@@ -34,6 +35,7 @@ const ListTask = ({
           statusHex={task.statusColor || ""}
           createdAt={task.createdAt || ""}
           completedAt={task.completedAt ? task.completedAt : ""}
+          footerCol={footerCol || false}
         />
       ))}
     </div>

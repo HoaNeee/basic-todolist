@@ -49,7 +49,7 @@ const LayoutDefault = () => {
 
   return (
     user && (
-      <main className="w-full flex h-screen bg-[#F5F8FF]">
+      <main className="w-full flex h-screen bg-[#F5F8FF] overflow-y-auto">
         <ToastContainer
           position="top-right"
           autoClose={3000}

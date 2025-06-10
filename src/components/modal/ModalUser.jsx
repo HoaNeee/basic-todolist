@@ -140,16 +140,20 @@ const ModalUser = ({
                     )}
                     data-img-url={item.avatar || ""}
                   />
-                  <img
-                    className="w-[54px] h-[54px] object-cover rounded-xl"
-                    src={item.avatar || AvatarNotFound}
-                    alt=""
-                  />
-                  <div className="max-w-32 sm:max-w-full">
-                    <p className="font-semibold max-w-full">{item.fullname}</p>
-                    <p className="text-sm mt-0.5 text-gray-500 text-ellipsis line-clamp-1">
-                      {item.email}
-                    </p>
+                  <div className="flex-1">
+                    <img
+                      className="w-[54px] h-[54px] object-cover rounded-xl"
+                      src={item.avatar || AvatarNotFound}
+                      alt=""
+                    />
+                    <div className="max-w-32 sm:max-w-full">
+                      <p className="font-semibold max-w-full">
+                        {item.fullname}
+                      </p>
+                      <p className="text-sm mt-0.5 text-gray-500 text-ellipsis line-clamp-1">
+                        {item.email}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}

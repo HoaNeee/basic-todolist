@@ -282,7 +282,12 @@ const HomePage = () => {
               {loading && <Loading />}
               <div className="mt-2 px-5 xl:overflow-y-auto xl:h-full scroll-none xl:pb-9">
                 {taskCompleted && taskCompleted.length > 0 ? (
-                  <ListTask tasks={taskCompleted} Link={true} onPage={false} />
+                  <ListTask
+                    tasks={taskCompleted}
+                    Link={true}
+                    onPage={false}
+                    footerCol
+                  />
                 ) : (
                   <div className="flex items-center justify-center h-full min-h-40">
                     <p className="text-[#bababa]">No task at here...</p>
